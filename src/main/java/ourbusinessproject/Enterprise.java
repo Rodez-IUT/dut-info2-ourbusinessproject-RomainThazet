@@ -1,8 +1,18 @@
 package ourbusinessproject;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.*;
 
+@Entity
 public class Enterprise {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
     @NotEmpty
     private String name;
     @NotEmpty @Size(min = 10)
