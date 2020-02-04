@@ -9,6 +9,14 @@ import javax.validation.constraints.*;
 @Entity
 public class Enterprise {
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
