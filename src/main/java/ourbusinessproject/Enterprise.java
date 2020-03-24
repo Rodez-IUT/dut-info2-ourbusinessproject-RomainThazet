@@ -1,13 +1,15 @@
 package ourbusinessproject;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 public class Enterprise {
+
+    @OneToMany (mappedBy = "project")
+    private Collection<Project> projects = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -30,6 +32,8 @@ public class Enterprise {
     @NotEmpty @Email
     private String contactEmail;
 
+    private Object project;
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -40,6 +44,10 @@ public class Enterprise {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public void setProject(Object project) {
+        this.project = project;
     }
 
     public String getDescription() {
@@ -61,4 +69,8 @@ public class Enterprise {
     public String getName() {
         return name;
     }
+
+    public Object getProjects() { return project; }
+
+
 }
