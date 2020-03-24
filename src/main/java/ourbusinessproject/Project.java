@@ -1,5 +1,6 @@
 package ourbusinessproject;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,6 +25,12 @@ public class Project {
     private String title;
     private String description;
 
+
+
+    @NotNull
+    @Column(name="enterprise")
+    private Enterprise enterprise;
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -38,5 +45,11 @@ public class Project {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setEnterprise(Enterprise enterprise) { this.enterprise = enterprise; }
+
+    public Enterprise getEnterprise() {
+        return enterprise;
     }
 }
