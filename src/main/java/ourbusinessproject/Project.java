@@ -29,6 +29,17 @@ public class Project {
         return entreprise;
     }
 
+
+    public Project() {
+
+    }
+
+    public Project(String title, String description, Enterprise enterprise) {
+        this.title = title;
+        this.description = description;
+        this.entreprise = enterprise;
+    }
+
     public void setEnterprise(Enterprise entreprise) {
         this.entreprise = entreprise;
     }
