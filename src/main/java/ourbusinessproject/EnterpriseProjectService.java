@@ -15,11 +15,10 @@ public class EnterpriseProjectService {
     }
 
     public void save(Project p) {
-        save(p.getEnterprise());
-        if(p.getEnterprise().getId() != null) {
-            Enterprise ent = findEnterpriseById(p.getEnterprise().getId());
-            ent.getProjects().add(p);
-            save(ent);
+
+        if(p.getEnterprise() != null) {
+            p.getEnterprise().addProject(p);
+            save(p.getEnterprise());
         }
 
         entityManager.persist(p);
