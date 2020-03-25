@@ -1,76 +1,80 @@
 package ourbusinessproject;
 
+
+
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+import org.springframework.boot.autoconfigure.web.ResourceProperties;
+
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
 
 @Entity
 public class Enterprise {
 
-    @OneToMany (mappedBy = "project")
-    private Collection<Project> projects = new HashSet<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Id
     @GeneratedValue
-    private Long id;
+    private Long Id;
 
     @NotEmpty
-    private String name;
-    @NotEmpty @Size(min = 10)
-    private String description;
+    private String Name;
+
     @NotEmpty
-    private String contactName;
-    @NotEmpty @Email
-    private String contactEmail;
+    @Size(min = 10)
+    private String Description;
 
-    private Object project;
+    @OneToMany(mappedBy = "entreprise")
+    public Collection<Project>  Projects = new HashSet<>();
 
-    public void setDescription(String description) {
-        this.description = description;
+    public Collection<Project> getProjects() {
+        return Projects;
     }
 
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
+    public void setProjects(Collection<Project> projects) {
+        Projects = projects;
     }
 
-    public void setContactEmail(String contactEmail) {
-        this.contactEmail = contactEmail;
-    }
+    @NotEmpty
+    private String ContactName;
 
-    public void setProject(Object project) {
-        this.project = project;
-    }
+    @NotEmpty
+    @Email
+    private String ContactEmail;
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getContactName() {
-        return contactName;
-    }
-
-    public String getContactEmail() {
-        return contactEmail;
+    public String getName() {
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
     }
 
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return Description;
     }
 
-    public Object getProjects() { return project; }
+    public void setDescription(String description) {
+        Description = description;
+    }
 
+    public String getContactName() {
+        return ContactName;
+    }
 
+    public void setContactName(String contactName) {
+        ContactName = contactName;
+    }
+
+    public String getContactEmail() {
+        return ContactEmail;
+    }
+
+    public void setContactEmail(String contactEmail) {
+        ContactEmail = contactEmail;
+    }
+
+    public Long getId() { return Id; }
 }
