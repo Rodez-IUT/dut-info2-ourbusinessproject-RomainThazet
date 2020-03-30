@@ -1,6 +1,6 @@
-# LP MMS - Persistance des données
+# LP MMS - Persitance des données
 
 ### NOM : Thazet
 ### Prénom : Romain
-### Groupe de TP :
+### Groupe de TP : 
 - [x] TD1

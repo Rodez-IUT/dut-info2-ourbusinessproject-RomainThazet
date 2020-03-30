@@ -1,13 +1,11 @@
 package ourbusinessproject;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.mockito.Mockito.*;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.EntityManager;
@@ -75,7 +73,4 @@ public class EnterpriseProjectServiceTest {
         // then: the find method is invoke on the entity manager
         verify(entityManager).find(Enterprise.class, anId);
     }
-
-
-
 }

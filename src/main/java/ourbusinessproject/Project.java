@@ -1,14 +1,9 @@
 package ourbusinessproject;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.List;
 
 @Entity
 public class Project {
@@ -19,33 +14,15 @@ public class Project {
 
     @NotEmpty
     private String title;
+
     private String description;
 
-    @ManyToOne
     @NotNull
-    public Enterprise entreprise;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Enterprise enterprise;
 
-    public Enterprise getEnterprise() {
-        return entreprise;
-    }
-
-
-    public Project() {
-
-    }
-
-    public Project(String title, String description, Enterprise enterprise) {
-        this.title = title;
+    public void setDescription(String description) {
         this.description = description;
-        this.entreprise = enterprise;
-    }
-
-    public void setEnterprise(Enterprise entreprise) {
-        this.entreprise = entreprise;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public String getDescription() {
@@ -56,9 +33,42 @@ public class Project {
         this.title = title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getTitle() {
+        return title;
     }
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
+
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
+
+        if (enterprise != null) {
+            enterprise.setProjects(List.of(this));
+        }
+    }
+
+    public Project() {
+        this.title = "";
+        this.description = "";
+        this.enterprise = new Enterprise();
+    }
+
+    public Project(String title, String description, Enterprise enterprise) {
+        this.title = title;
+        this.description = description;
+        this.enterprise = enterprise;
+    }
+
+    @Override
+    public String toString(){
+        return "Projet " + this.title + ": "
+                + "<br/>Description : " + this.description
+                + "<br/>Entreprise : " + this.enterprise.getName();
+    }
 }

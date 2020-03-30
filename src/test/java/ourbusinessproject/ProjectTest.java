@@ -31,7 +31,6 @@ public class ProjectTest {
         project.setTitle("A project");
         project.setDescription("Project description");
         project.setEnterprise(enterprise);
-
     }
 
     @Test
@@ -85,7 +84,6 @@ public class ProjectTest {
 
         // then: the project is no more valid
         assertFalse("expected one constraint violation", validator.validate(project).isEmpty());
-
     }
 
 }

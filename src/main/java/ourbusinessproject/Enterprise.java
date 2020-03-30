@@ -1,91 +1,75 @@
 package ourbusinessproject;
 
-
-
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
-import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.List;
 
 @Entity
 public class Enterprise {
 
     @Id
     @GeneratedValue
-    private Long Id;
+    private Long id;
 
     @NotEmpty
-    private String Name;
+    private String name;
+
+    @NotEmpty @Size(min = 10)
+    private String description;
 
     @NotEmpty
-    @Size(min = 10)
-    private String Description;
+    private String contactName;
 
-    @OneToMany(mappedBy = "entreprise")
-    public Collection<Project>  Projects ;
+    @NotEmpty @Email
+    private String contactEmail;
 
-    public Collection<Project> getProjects() {
-        return Projects;
-    }
-
-    public void setProjects(Collection<Project> projects) {
-        Projects = projects;
-    }
-
-    @NotEmpty
-    private String ContactName;
-
-    @NotEmpty
-    @Email
-    private String ContactEmail;
+    /** Liste des projets */
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Project> projects;
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public String getContactName() {
-        return ContactName;
+        return contactName;
     }
 
     public void setContactName(String contactName) {
-        ContactName = contactName;
+        this.contactName = contactName;
     }
 
     public String getContactEmail() {
-        return ContactEmail;
+        return contactEmail;
     }
 
     public void setContactEmail(String contactEmail) {
-        ContactEmail = contactEmail;
+        this.contactEmail = contactEmail;
     }
 
-    public Long getId() { return Id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void addProject(Project p){
-        if(this.Projects == null){
-            this.Projects = new ArrayList<Project>();
-        }
-        this.Projects.add(p);
+    public List<Project> getProjects() {
+        return projects;
+    }
 
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }

@@ -1,32 +1,16 @@
 package ourbusinessproject;
 
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class EnterpriseProjectService {
-
-
-    public void save(Enterprise e) {
-        entityManager.persist(e);
-        entityManager.flush();
-    }
-
-    public void save(Project p) {
-
-        if(p.getEnterprise() != null) {
-            p.getEnterprise().addProject(p);
-            save(p.getEnterprise());
-        }
-
-        entityManager.persist(p);
-        entityManager.flush();
-    }
-
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -39,20 +23,24 @@ public class EnterpriseProjectService {
         this.entityManager = entityManager;
     }
 
-    public Project findProjectById(Long IdProject) {
-
-        Project projet2 = entityManager.find(Project.class, IdProject);
-        return projet2;
+    public void save(Object entity) {
+        entityManager.persist(entity);
+        entityManager.flush();
     }
 
-    public Enterprise findEnterpriseById(Long IdEnterprise) {
-        Enterprise entreprise2 = entityManager.find(Enterprise.class, IdEnterprise);
-        return entreprise2;
+    public Project findProjectById(Long idProject) {
+        return entityManager.find(Project.class, idProject);
+    }
+
+    public Enterprise findEnterpriseById(Long idEnterprise) {
+        return entityManager.find(Enterprise.class, idEnterprise);
     }
 
     public List<Project> findAllProjects() {
-        String Query = "Select p From Project p ORDER BY p.title";
-        TypedQuery<Project> queryObj = entityManager.createQuery(Query,Project.class);
-        return queryObj.getResultList();
+        String sql = "SELECT p FROM Project p ORDER BY p.title";
+        TypedQuery<Project> projects =
+                entityManager.createQuery(sql, Project.class);
+        return projects.getResultList();
     }
+
 }
