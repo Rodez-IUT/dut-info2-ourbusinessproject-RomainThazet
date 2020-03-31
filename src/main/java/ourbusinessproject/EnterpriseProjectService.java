@@ -37,7 +37,8 @@ public class EnterpriseProjectService {
     }
 
     public List<Project> findAllProjects() {
-        String sql = "SELECT p FROM Project p ORDER BY p.title";
+        //Execution d'une seule requête pour éviter les doublons
+        String sql = "SELECT p FROM Project p JOIN FETCH p.enterprise e ORDER BY p.title" ;
         TypedQuery<Project> projects =
                 entityManager.createQuery(sql, Project.class);
         return projects.getResultList();
