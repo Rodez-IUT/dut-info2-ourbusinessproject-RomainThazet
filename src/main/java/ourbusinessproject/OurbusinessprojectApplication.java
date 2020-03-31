@@ -10,4 +10,10 @@ public class OurbusinessprojectApplication {
         SpringApplication.run(OurbusinessprojectApplication.class, args);
     }
 
+    //Trois requêtes:
+    //Une requête qui fait un select sur tout les projets
+    // Et deux autres requêtes en double (select entreprise0.id ..etc)
+    //
+    //Elles sont quand même présentes car lorsqu'un projet possède une entreprise, on cherche cette entreprise-là.
+
 }
