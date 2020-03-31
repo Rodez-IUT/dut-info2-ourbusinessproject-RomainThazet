@@ -22,6 +22,10 @@ public class InitializationService {
 
     @Transactional
     public void initProjects() {
+        // Phénomène observé: si les annotations sont erronées
+        // lors de l'initialisation d'un objet, alors:
+        // aucun objet n'est crée (puisqu'il s'agit d'une @Transactional)
+
         enterprise1 = new Enterprise();
         enterprise1.setName("Enterprise 1");
         enterprise1.setDescription("Enterprise 1 description");

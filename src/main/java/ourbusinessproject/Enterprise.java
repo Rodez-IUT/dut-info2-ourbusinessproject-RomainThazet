@@ -5,6 +5,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Enterprise {
@@ -65,6 +66,7 @@ public class Enterprise {
         return id;
     }
 
+    @JsonIgnore
     public List<Project> getProjects() {
         return projects;
     }
